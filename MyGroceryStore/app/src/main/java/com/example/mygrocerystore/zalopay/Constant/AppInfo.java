@@ -1,4 +1,4 @@
-package com.zlpdemo.merchantDemo.Constant;
+package com.example.mygrocerystore.zalo.Constant;
 
 public class AppInfo {
     public static final int APP_ID = 2553;

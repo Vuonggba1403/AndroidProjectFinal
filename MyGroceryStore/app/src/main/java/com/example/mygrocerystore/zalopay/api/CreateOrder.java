@@ -1,7 +1,7 @@
-package com.zlpdemo.merchantDemo.Api;
+package com.example.mygrocerystore.zalo.api;
 
-import com.zlpdemo.merchantDemo.Constant.AppInfo;
-import com.zlpdemo.merchantDemo.Helper.Helpers;
+import com.example.mygrocerystore.zalo.Constant.AppInfo;
+import com.example.mygrocerystore.zalo.Helper.Helpers;
 
 import org.json.JSONObject;
 
