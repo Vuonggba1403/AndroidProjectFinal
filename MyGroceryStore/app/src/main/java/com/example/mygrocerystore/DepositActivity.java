@@ -49,7 +49,7 @@ public class DepositActivity extends AppCompatActivity {
 
         // ZaloPay SDK Init
         ZaloPaySDK.init(2553, Environment.SANDBOX);
-
+        // test
 
         dispay1 = findViewById(R.id.display_money);
         imgreturn = findViewById(R.id.returnhome);
