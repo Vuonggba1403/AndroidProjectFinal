@@ -1,4 +1,4 @@
-package com.example.mygrocerystore.zalo.Constant;
+package com.example.mygrocerystore.zalopay.Constant;
 
 public class AppInfo {
     public static final int APP_ID = 2553;

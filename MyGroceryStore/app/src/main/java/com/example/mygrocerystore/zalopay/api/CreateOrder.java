@@ -1,7 +1,8 @@
-package com.example.mygrocerystore.zalo.api;
+package com.example.mygrocerystore.zalopay.api;
 
-import com.example.mygrocerystore.zalo.Constant.AppInfo;
-import com.example.mygrocerystore.zalo.Helper.Helpers;
+
+import com.example.mygrocerystore.zalopay.Constant.AppInfo;
+import com.example.mygrocerystore.zalopay.Helper.Helpers;
 
 import org.json.JSONObject;
 

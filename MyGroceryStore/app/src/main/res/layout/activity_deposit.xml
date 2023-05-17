@@ -1,9 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".DepositActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <ImageView
+        android:id="@+id/returnhome"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="end"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="30dp"
+        android:src="@drawable/baseline_keyboard_return_24"/>
+    <TextView
+        android:id="@+id/display_money"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0 VND"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:textSize="20dp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/andika"
+        />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="250dp"
+        android:layout_marginTop="80dp"
+        android:src="@drawable/credit" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:textSize="15dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:fontFamily="@font/andika_new_basic"
+        android:text="Enter The Amount You Want To Deposit?"/>
+    <EditText
+        android:id="@+id/edtadd_money"
+        android:layout_width="300dp"
+        android:layout_gravity="center"
+        android:hint="Enter Money"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_height="wrap_content"/>
+    <Button
+        android:id="@+id/btnadd_money"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="Deposit"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:drawableLeft="@drawable/baseline_attach_money_24"/>
+
+
+
+</LinearLayout>

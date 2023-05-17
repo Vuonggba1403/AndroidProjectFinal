@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/placedorder"
@@ -10,13 +12,44 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyGroceryStore">
         <activity
+            android:name=".activities.DetailedActivity"
+            android:exported="false"
+          />
+        <activity
+            android:name=".PaymentOnline"
+            android:exported="false"
+         />
+        <activity
             android:name=".activities.PlacedOrderActivity"
-            android:exported="false" />
+            android:exported="true"
+            android:launchMode="singleTask">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="app"
+                    android:scheme="demozpdk" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".DepositActivity"
+            android:exported="true"
+            android:launchMode="singleTask">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="app"
+                    android:scheme="demozpdk"/>
+            </intent-filter>
+        </activity>
         <activity
             android:name=".activities.MainActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activities.DetailedActivity"
             android:exported="false" />
         <activity
             android:name=".activities.ViewAllActivity"
@@ -31,7 +64,6 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

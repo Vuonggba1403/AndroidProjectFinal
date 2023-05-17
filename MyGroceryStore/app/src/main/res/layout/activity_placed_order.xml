@@ -98,13 +98,16 @@
       android:layout_gravity="center"
        android:textColor="@color/white"/>
    <androidx.appcompat.widget.AppCompatButton
+       android:id="@+id/btnzalopay"
        android:layout_width="250dp"
       android:background="#2196F3"
       android:textColor="@color/white"
       android:layout_marginTop="50dp"
       android:layout_gravity="center"
        android:layout_height="wrap_content"
-      android:text="Payment With ZaloPay"/>
+      android:text="Payment With Zalopay"/>
+
+
 
 
 

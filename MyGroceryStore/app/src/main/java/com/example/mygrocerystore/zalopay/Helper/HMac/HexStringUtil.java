@@ -1,4 +1,4 @@
-package com.example.mygrocerystore.zalo.Helper.HMac;
+package com.example.mygrocerystore.zalopay.Helper.HMac;
 
 import java.util.Locale;
 

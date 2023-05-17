@@ -195,6 +195,7 @@ public class HomeFragment extends Fragment {
                     viewAllAdapter.notifyDataSetChanged();
                 } else {
                     searchProduct(s.toString());
+                    searchProduct1(s.toString());
                 }
             }
         });
@@ -203,6 +204,7 @@ public class HomeFragment extends Fragment {
         return root;
 
     }
+
 
     private void searchProduct(String type) {
 
@@ -228,8 +230,36 @@ public class HomeFragment extends Fragment {
                         }
                     });
 
+
         }
 
     }
+    private void searchProduct1(String type) {
+        if (!type.isEmpty()) {
+            String startValue = type;
+            String endValue = type + "\uf8ff";
+
+            db.collection("AllProducts")
+                    .whereGreaterThanOrEqualTo("name", startValue)
+                    .whereLessThan("name", endValue)
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful() && task.getResult() != null) {
+                                viewAllModelList.clear();
+                                viewAllAdapter.notifyDataSetChanged();
+
+                                for (DocumentSnapshot doc : task.getResult().getDocuments()) {
+                                    ViewAllModel viewAllModel = doc.toObject(ViewAllModel.class);
+                                    viewAllModelList.add(viewAllModel);
+                                    viewAllAdapter.notifyDataSetChanged();
+                                }
+                            }
+                        }
+                    });
+        }
+    }
+
 
 }

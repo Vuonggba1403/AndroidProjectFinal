@@ -139,11 +139,11 @@ public class MyCartsFragment extends Fragment {
                 intent.putExtra("itemList", (Serializable) cartModelList);
                 startActivity(intent);
 
-                // Xoá hết sản phẩm
-                cartModelList.clear();
-                cartAdapter.notifyDataSetChanged();
-                overTotalAmount.setText("Total Amount : 0 VNĐ");
-                buyNow.setVisibility(View.GONE);
+//                // Xoá hết sản phẩm
+//                cartModelList.clear();
+//                cartAdapter.notifyDataSetChanged();
+//                overTotalAmount.setText("Total Amount : 0 VNĐ");
+//                buyNow.setVisibility(View.GONE);
 
             }
         });
@@ -165,6 +165,7 @@ public class MyCartsFragment extends Fragment {
         totalAmount -= discountAmount;
 
         overTotalAmount.setText("Total Amount : " + totalAmount + " VNĐ");
+
 
         return totalAmount;
     }

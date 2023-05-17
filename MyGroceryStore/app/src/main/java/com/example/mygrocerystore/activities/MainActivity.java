@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_category, R.id.nav_profile, R.id.nav_offers, R.id.nav_new_products,
+                R.id.nav_home, R.id.nav_category, R.id.nav_profile,
                 R.id.nav_my_carts, R.id.nav_my_orders)
                 .setOpenableLayout(drawer)
                 .build();
@@ -121,6 +121,8 @@ public class MainActivity extends AppCompatActivity {
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.remove("username");
             editor.remove("password");
+            editor.remove("number");
+            editor.remove("address");
             editor.apply();
             Toast.makeText(MainActivity.this, "Logout Successful", Toast.LENGTH_SHORT).show();
 
