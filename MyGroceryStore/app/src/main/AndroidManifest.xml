@@ -12,13 +12,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyGroceryStore">
         <activity
+            android:name=".activities.ChatsActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.DetailedActivity"
-            android:exported="false"
-          />
+            android:exported="false" />
         <activity
             android:name=".PaymentOnline"
-            android:exported="false"
-         />
+            android:exported="false" />
         <activity
             android:name=".activities.PlacedOrderActivity"
             android:exported="true"
@@ -34,7 +35,8 @@
                     android:scheme="demozpdk" />
             </intent-filter>
         </activity>
-        <activity android:name=".DepositActivity"
+        <activity
+            android:name=".DepositActivity"
             android:exported="true"
             android:launchMode="singleTask">
             <intent-filter>
@@ -45,7 +47,7 @@
 
                 <data
                     android:host="app"
-                    android:scheme="demozpdk"/>
+                    android:scheme="demozpdk" />
             </intent-filter>
         </activity>
         <activity

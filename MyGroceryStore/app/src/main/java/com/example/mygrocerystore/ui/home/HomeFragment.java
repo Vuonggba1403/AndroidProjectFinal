@@ -1,5 +1,6 @@
 package com.example.mygrocerystore.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -9,16 +10,16 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mygrocerystore.R;
+import com.example.mygrocerystore.activities.ChatsActivity;
+import com.example.mygrocerystore.activities.ViewAllActivity;
 import com.example.mygrocerystore.adapters.HomeAdapter;
 import com.example.mygrocerystore.adapters.PopularAdapters;
 import com.example.mygrocerystore.adapters.RecommendedAdapter;
@@ -29,12 +30,12 @@ import com.example.mygrocerystore.models.RecommendedModel;
 import com.example.mygrocerystore.models.ViewAllModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import org.checkerframework.checker.units.qual.s;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,8 +46,6 @@ public class HomeFragment extends Fragment {
 
     ScrollView scrollView;
     ProgressBar processBar;
-
-
 
     RecyclerView popularRec,homeCatRec,recommendedRec;
     FirebaseFirestore db;
@@ -61,8 +60,6 @@ public class HomeFragment extends Fragment {
     private List<ViewAllModel> viewAllModelList;
     private RecyclerView recyclerViewSearch;
     private ViewAllAdapter viewAllAdapter;
-
-
 
     //Home Category
     List<HomeCategory> categoryList;
@@ -83,6 +80,16 @@ public class HomeFragment extends Fragment {
         recommendedRec = root.findViewById(R.id.recommended_rec);
         scrollView = root.findViewById(R.id.scroll_view);
         processBar = root.findViewById(R.id.progressbar);
+
+        // button chat
+        FloatingActionButton fab = root.findViewById(R.id.floating_action_button);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ChatsActivity.class);
+                startActivity(intent);
+            }
+        });
 
         processBar.setVisibility(View.VISIBLE);
         scrollView.setVisibility(View.GONE);
