@@ -55,6 +55,7 @@ public class DepositActivity extends AppCompatActivity {
         imgreturn = findViewById(R.id.returnhome);
         edtmoney = findViewById(R.id.edtadd_money);
         btnmoney = findViewById(R.id.btnadd_money);
+        dispay1 = findViewById(R.id.display_money);
 
         imgreturn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,42 +69,55 @@ public class DepositActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String amount = edtmoney.getText().toString().trim();
 
-                    // Tạo đối tượng CreateOrder để gọi API tạo đơn hàng
+                // Check if the amount is not empty
+                if (!amount.isEmpty()) {
+                    // Convert the amount to the appropriate format (e.g., cents)
+                    int amountInCents = Integer.parseInt(amount) * 100;
+
+                    // Call the ZaloPay SDK to create an order
                     CreateOrder orderApi = new CreateOrder();
+
                     try {
-                        // Tạo đơn hàng với giá trị amount
-                        JSONObject data = orderApi.createOrder(amount);
+                        // Create the order with the specified amount
+                        JSONObject data = orderApi.createOrder(String.valueOf(amountInCents));
                         String code = data.getString("return_code");
 
                         if (code.equals("1")) {
-//                            Log.d("ok",amount);
-                            String token = ((JSONObject) data).getString("order_url");
-                            // Gọi ZaloPay SDK để thực hiện thanh toán
-                            ZaloPaySDK.getInstance().payOrder(DepositActivity.this, token, "demozpdk://app", new PayOrderListener() {
+                            // Get the transaction token
+                            String token = data.getString("zp_trans_token");
 
+                            // Use the ZaloPay SDK to initiate the payment
+                            ZaloPaySDK.getInstance().payOrder(DepositActivity.this, token, "demozpdk://app", new PayOrderListener() {
                                 @Override
                                 public void onPaymentSucceeded(String transactionId, String transToken, String appTransID) {
-//                                    Log.d("ok",amount);
-//                                    Log.d("ok",amount);
-                                    //hello
-
+                                    // Handle successful payment
+                                    // You can perform necessary actions here, such as updating the user's balance or displaying a success message.
+                                    Toast.makeText(DepositActivity.this, "Payment succeeded", Toast.LENGTH_SHORT).show();
                                 }
 
                                 @Override
                                 public void onPaymentCanceled(String zpTransToken, String appTransID) {
+                                    // Handle payment cancellation
+                                    // You can perform necessary actions here, such as displaying a cancellation message.
+                                    Toast.makeText(DepositActivity.this, "Payment canceled", Toast.LENGTH_SHORT).show();
                                 }
 
                                 @Override
                                 public void onPaymentError(ZaloPayError zaloPayError, String zpTransToken, String appTransID) {
-
+                                    // Handle payment error
+                                    // You can perform necessary actions here, such as displaying an error message.
+                                    Toast.makeText(DepositActivity.this, "Payment error: ", Toast.LENGTH_SHORT).show();
                                 }
                             });
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+                } else {
+                    // Display an error message if the amount is empty
+                    Toast.makeText(DepositActivity.this, "Please enter the amount", Toast.LENGTH_SHORT).show();
                 }
-
+            }
         });
     }
 
