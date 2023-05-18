@@ -47,7 +47,7 @@ public class ChatsActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         Window window = ChatsActivity.this.getWindow();
-        window.setStatusBarColor(ContextCompat.getColor(ChatsActivity.this, R.color.bg_header_chats));
+        window.setStatusBarColor(ContextCompat.getColor(ChatsActivity.this, R.color.black));
 
         affordance = binding.affordance;
         affordance.setOnClickListener(new View.OnClickListener() {

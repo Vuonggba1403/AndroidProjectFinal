@@ -32,7 +32,7 @@
         android:id="@+id/detailed_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/alice"
+        android:fontFamily="@font/alata"
         android:text="Price : 25000 VNĐ/kg"
         android:textColor="@color/purple_700"
         android:textSize="20dp"
@@ -74,7 +74,7 @@
         android:id="@+id/textView19"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/alice"
+        android:fontFamily="@font/alata"
         android:text="Description"
         android:textColor="#1D5306"
         android:textSize="22sp"
@@ -114,11 +114,11 @@
 
 
         <ImageView
-            android:id="@+id/add_item"
+            android:id="@+id/remove_item"
             android:layout_width="54dp"
             android:layout_height="54dp"
             android:layout_marginStart="7dp"
-            android:src="@drawable/add_circle"
+            android:src="@drawable/baseline_remove_24"
             android:layout_marginTop="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -139,27 +139,27 @@
         android:textSize="28dp" />
 
     <ImageView
-        android:id="@+id/remove_item"
+        android:id="@+id/add_item"
         android:layout_width="54dp"
         android:layout_height="54dp"
-        android:src="@drawable/remove_circle"
+        android:src="@drawable/add_item"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/quatity"
         app:layout_constraintTop_toTopOf="@+id/relativeLayout"/>
-    <androidx.appcompat.widget.AppCompatButton
+    <Button
         android:id="@+id/add_to_cart"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/colorbutton"
         android:textColor="@color/white"
         android:fontFamily="@font/andika"
-        android:text="Add to cart"
-        android:textSize="20dp"
+        android:drawableLeft="@drawable/addtocart"
+        android:text="Add"
+        android:textSize="17sp"
         android:textStyle="bold"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="6dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintVertical_bias="0.393" />

@@ -3,5 +3,5 @@
     android:shape="rectangle">
 
     <solid
-        android:color="@color/bg_header_chats"/>
+        android:color="#3B54E3"/>
 </shape>

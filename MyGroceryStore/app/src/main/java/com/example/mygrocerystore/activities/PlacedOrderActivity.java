@@ -175,6 +175,10 @@ public class PlacedOrderActivity extends AppCompatActivity
 
 
 
+        overTotalAmount.setText(totalAmount + " VNĐ");
+
+
+
         paymentonline.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -198,8 +202,9 @@ public class PlacedOrderActivity extends AppCompatActivity
                     Toast.makeText(PlacedOrderActivity.this, "Please Enter Information !", Toast.LENGTH_SHORT).show();
                     return;
                 } else {
-                    Intent intent = new Intent(PlacedOrderActivity.this, PaymentOnline.class);
-                    startActivity(intent);
+
+
+
                 }
 
                 firestore.collection("AddToCart")

@@ -4,7 +4,9 @@ import static com.google.android.material.internal.ContextUtils.getActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
@@ -16,11 +18,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mygrocerystore.activities.MainActivity;
+import com.example.mygrocerystore.activities.PlacedOrderActivity;
 import com.example.mygrocerystore.ui.profile.ProfileFragment;
 import com.example.mygrocerystore.zalopay.api.CreateOrder;
 
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
 import vn.zalopay.sdk.Environment;
@@ -31,6 +35,8 @@ import vn.zalopay.sdk.listeners.PayOrderListener;
 public class DepositActivity extends AppCompatActivity {
 
     ImageView imgreturn;
+    HashMap<Integer, Integer> moneyMap = new HashMap<>(); // HashMap để lưu trữ số tiền vừa nhập
+
     EditText edtmoney;
     Button btnmoney;
     TextView dispay1;
@@ -55,6 +61,7 @@ public class DepositActivity extends AppCompatActivity {
         imgreturn = findViewById(R.id.returnhome);
         edtmoney = findViewById(R.id.edtadd_money);
         btnmoney = findViewById(R.id.btnadd_money);
+        dispay1 = findViewById(R.id.display_money);
 
         imgreturn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,25 +75,45 @@ public class DepositActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String amount = edtmoney.getText().toString().trim();
 
-                    // Tạo đối tượng CreateOrder để gọi API tạo đơn hàng
+                // Check if the amount is not empty
+                if (!amount.isEmpty()) {
+                    // Call the ZaloPay SDK to create an order
                     CreateOrder orderApi = new CreateOrder();
+
                     try {
-                        // Tạo đơn hàng với giá trị amount
+                        // Create the order with the specified amount
                         JSONObject data = orderApi.createOrder(amount);
                         String code = data.getString("return_code");
+                        // Chuyển đổi giá trị thành số nguyên
+                        int amountInCents = Integer.parseInt(amount);
+
+                        // Lấy giá trị hiện tại từ HashMap hoặc 0 nếu chưa tồn tại
+                        int currentAmount = moneyMap.getOrDefault(amountInCents, 0);
+
+                        // Cộng dồn số tiền và cập nhật lại HashMap
+                        currentAmount += amountInCents;
+                        moneyMap.put(amountInCents, currentAmount);
+
+                        // Hiển thị kết quả lên dispay1
+                        dispay1.setText(String.valueOf(currentAmount) + " VND");
+
+                        // Reset giá trị trong ô nhập liệu
+                        edtmoney.setText("");
+
+                        // Lưu giá trị của dispay1 vào SharedPreferences
+                        SharedPreferences preferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = preferences.edit();
+                        editor.putInt("currentAmount", currentAmount);
+                        editor.apply();
 
                         if (code.equals("1")) {
-//                            Log.d("ok",amount);
-                            String token = ((JSONObject) data).getString("order_url");
-                            // Gọi ZaloPay SDK để thực hiện thanh toán
+//
+//                            dispay1.setText(amountover);
+                            // Get the transaction token
+                            String token = data.getString("zp_trans_token");
                             ZaloPaySDK.getInstance().payOrder(DepositActivity.this, token, "demozpdk://app", new PayOrderListener() {
-
                                 @Override
                                 public void onPaymentSucceeded(String transactionId, String transToken, String appTransID) {
-//                                    Log.d("ok",amount);
-//                                    Log.d("ok",amount);
-                                    //hello
-
                                 }
 
                                 @Override
@@ -102,8 +129,11 @@ public class DepositActivity extends AppCompatActivity {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+                } else {
+                    // Display an error message if the amount is empty
+                    Toast.makeText(DepositActivity.this, "Please enter the amount", Toast.LENGTH_SHORT).show();
                 }
-
+            }
         });
     }
 
