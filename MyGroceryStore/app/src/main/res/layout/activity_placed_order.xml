@@ -26,7 +26,7 @@
           android:textColor="@color/black"
           android:textSize="25dp"
           android:textStyle="bold"
-          android:fontFamily="@font/andika"
+          android:fontFamily="@font/alata"
           android:layout_gravity="center"
           android:layout_marginLeft="10dp"
           android:layout_height="wrap_content"/>
@@ -46,6 +46,7 @@
       <EditText
           android:id="@+id/phonenumber"
           android:layout_width="300dp"
+          android:backgroundTint="@color/white"
           android:hint="Enter Phone Number"
           android:layout_marginLeft="10dp"
           android:layout_height="match_parent"/>
@@ -65,6 +66,7 @@
           android:id="@+id/gmail"
           android:layout_width="300dp"
           android:hint="Enter Gmail"
+          android:backgroundTint="@color/white"
           android:layout_marginLeft="10dp"
           android:layout_height="match_parent"/>
    </LinearLayout>
@@ -83,6 +85,7 @@
       <EditText
           android:layout_width="300dp"
           android:id="@+id/delivery"
+          android:backgroundTint="@color/white"
           android:layout_marginLeft="10dp"
           android:hint="Delivery Address"
           android:layout_height="match_parent"/>
@@ -91,9 +94,11 @@
    <androidx.appcompat.widget.AppCompatButton
        android:id="@+id/directpayment"
        android:layout_width="200dp"
+       android:fontFamily="@font/alata"
        android:layout_height="wrap_content"
        android:background="@drawable/colorbutton"
        android:text="Direct Payment"
+
       android:layout_marginTop="50dp"
       android:layout_gravity="center"
        android:textColor="@color/white"/>
