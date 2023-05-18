@@ -1,5 +1,7 @@
 package com.example.mygrocerystore.ui.category;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,12 +16,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mygrocerystore.R;
+import com.example.mygrocerystore.activities.ChatsActivity;
+import com.example.mygrocerystore.activities.ViewAllActivity;
 import com.example.mygrocerystore.adapters.HomeAdapter;
 import com.example.mygrocerystore.adapters.NavCategoryAdapter;
 import com.example.mygrocerystore.models.HomeCategory;
 import com.example.mygrocerystore.models.NavCategoryModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -45,6 +50,15 @@ public class CategoryFragment extends Fragment {
 
        recyclerView = root.findViewById(R.id.cat_rec);
 
+        // button chat
+        FloatingActionButton fab = root.findViewById(R.id.floating_action_button);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ChatsActivity.class);
+                startActivity(intent);
+            }
+        });
 
         //Home Category
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false));

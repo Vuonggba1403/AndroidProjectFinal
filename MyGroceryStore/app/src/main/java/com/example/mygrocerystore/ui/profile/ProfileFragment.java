@@ -1,5 +1,7 @@
 package com.example.mygrocerystore.ui.profile;
 
+import static android.content.Intent.getIntent;
+
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -68,8 +70,11 @@ public class ProfileFragment extends Fragment {
 
 
 
+
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+
 
 
 
@@ -86,6 +91,15 @@ public class ProfileFragment extends Fragment {
         delete = root.findViewById(R.id.deletein4);
         displaymon = root.findViewById(R.id.displaymoney);
         btndesposit = root.findViewById(R.id.textView19);
+
+        // Truy xuất giá trị từ SharedPreferences
+        SharedPreferences preferences = getActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        int currentAmount = preferences.getInt("currentAmount", 0);
+
+        // Hiển thị giá trị trong displaymon
+        displaymon.setText(String.valueOf(currentAmount) + " VND");
+
+
 
 
 
@@ -105,6 +119,7 @@ public class ProfileFragment extends Fragment {
 
                     }
                 });
+
         btndesposit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -143,7 +158,6 @@ public class ProfileFragment extends Fragment {
 
         return root;
     }
-
 
 
     private void showcustomDialog1() {

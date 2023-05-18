@@ -4,7 +4,9 @@ import static com.google.android.material.internal.ContextUtils.getActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
@@ -16,11 +18,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mygrocerystore.activities.MainActivity;
+import com.example.mygrocerystore.activities.PlacedOrderActivity;
 import com.example.mygrocerystore.ui.profile.ProfileFragment;
 import com.example.mygrocerystore.zalopay.api.CreateOrder;
 
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
 import vn.zalopay.sdk.Environment;
@@ -31,6 +35,8 @@ import vn.zalopay.sdk.listeners.PayOrderListener;
 public class DepositActivity extends AppCompatActivity {
 
     ImageView imgreturn;
+    HashMap<Integer, Integer> moneyMap = new HashMap<>(); // HashMap để lưu trữ số tiền vừa nhập
+
     EditText edtmoney;
     Button btnmoney;
     TextView dispay1;
@@ -49,7 +55,7 @@ public class DepositActivity extends AppCompatActivity {
 
         // ZaloPay SDK Init
         ZaloPaySDK.init(2553, Environment.SANDBOX);
-
+        // test
 
         dispay1 = findViewById(R.id.display_money);
         imgreturn = findViewById(R.id.returnhome);
@@ -71,42 +77,52 @@ public class DepositActivity extends AppCompatActivity {
 
                 // Check if the amount is not empty
                 if (!amount.isEmpty()) {
-                    // Convert the amount to the appropriate format (e.g., cents)
-                    int amountInCents = Integer.parseInt(amount) * 100;
-
                     // Call the ZaloPay SDK to create an order
                     CreateOrder orderApi = new CreateOrder();
 
                     try {
                         // Create the order with the specified amount
-                        JSONObject data = orderApi.createOrder(String.valueOf(amountInCents));
+                        JSONObject data = orderApi.createOrder(amount);
                         String code = data.getString("return_code");
+                        // Chuyển đổi giá trị thành số nguyên
+                        int amountInCents = Integer.parseInt(amount);
+
+                        // Lấy giá trị hiện tại từ HashMap hoặc 0 nếu chưa tồn tại
+                        int currentAmount = moneyMap.getOrDefault(amountInCents, 0);
+
+                        // Cộng dồn số tiền và cập nhật lại HashMap
+                        currentAmount += amountInCents;
+                        moneyMap.put(amountInCents, currentAmount);
+
+                        // Hiển thị kết quả lên dispay1
+                        dispay1.setText(String.valueOf(currentAmount) + " VND");
+
+                        // Reset giá trị trong ô nhập liệu
+                        edtmoney.setText("");
+
+                        // Lưu giá trị của dispay1 vào SharedPreferences
+                        SharedPreferences preferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = preferences.edit();
+                        editor.putInt("currentAmount", currentAmount);
+                        editor.apply();
 
                         if (code.equals("1")) {
+//
+//                            dispay1.setText(amountover);
                             // Get the transaction token
                             String token = data.getString("zp_trans_token");
-
-                            // Use the ZaloPay SDK to initiate the payment
                             ZaloPaySDK.getInstance().payOrder(DepositActivity.this, token, "demozpdk://app", new PayOrderListener() {
                                 @Override
                                 public void onPaymentSucceeded(String transactionId, String transToken, String appTransID) {
-                                    // Handle successful payment
-                                    // You can perform necessary actions here, such as updating the user's balance or displaying a success message.
-                                    Toast.makeText(DepositActivity.this, "Payment succeeded", Toast.LENGTH_SHORT).show();
                                 }
 
                                 @Override
                                 public void onPaymentCanceled(String zpTransToken, String appTransID) {
-                                    // Handle payment cancellation
-                                    // You can perform necessary actions here, such as displaying a cancellation message.
-                                    Toast.makeText(DepositActivity.this, "Payment canceled", Toast.LENGTH_SHORT).show();
                                 }
 
                                 @Override
                                 public void onPaymentError(ZaloPayError zaloPayError, String zpTransToken, String appTransID) {
-                                    // Handle payment error
-                                    // You can perform necessary actions here, such as displaying an error message.
-                                    Toast.makeText(DepositActivity.this, "Payment error: ", Toast.LENGTH_SHORT).show();
+
                                 }
                             });
                         }
