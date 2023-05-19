@@ -150,6 +150,7 @@ public class DetailedActivity extends AppCompatActivity {
         cartMap.put("currentTime", saveCurrentTime);
         cartMap.put("totalQuantity", quatity.getText().toString());
         cartMap.put("totalPrice", totalPrice);
+        cartMap.put("img_url", viewAllModel.getImg_url());
 
         // Tạo collection cho người dùng hiện tại
         firestore.collection("AddToCart")
