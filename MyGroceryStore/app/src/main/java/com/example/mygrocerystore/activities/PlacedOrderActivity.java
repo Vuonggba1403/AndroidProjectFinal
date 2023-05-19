@@ -208,6 +208,11 @@ public class PlacedOrderActivity extends AppCompatActivity
                         // Cập nhật giá trị currentAmount
                         displaymon.setText(String.valueOf(displaymoney1) + " VND");
 
+                        SharedPreferences.Editor editor = preferences.edit();
+                        editor.putInt("currentAmount", displaymoney1);
+                        editor.apply();
+
+
                         firestore.collection("AddToCart")
                                 .document(auth.getCurrentUser().getUid())
                                 .collection("CurrentUser")
