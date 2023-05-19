@@ -67,7 +67,7 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.ViewHolder
         holder.time.setText(cartModelList.get(position).getCurrentTime());
         holder.totalPrice.setText(String.valueOf(cartModelList.get(position).getTotalPrice()));
         holder.quantity.setText(cartModelList.get(position).getTotalQuantity());
-        Glide.with(context).load(cartModelList.get(position)).into(holder.imgProducts);
+        Glide.with(context).load(cartModelList.get(position).getImg_url()).into(holder.imgProducts);
 
 
 
