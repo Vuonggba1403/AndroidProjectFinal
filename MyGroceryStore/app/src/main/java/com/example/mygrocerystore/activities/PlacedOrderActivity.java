@@ -169,7 +169,7 @@ public class PlacedOrderActivity extends AppCompatActivity
 
         int currentAmount = preferences.getInt("currentAmount", 0);
 
-        displaymon.setText(String.valueOf(currentAmount) + " VND");
+        displaymon.setText(currentAmount + " VND");
         if (!storedAddress.isEmpty()) {
             delivery.setText(storedAddress);
             phonenumber.setText(storeNumber);

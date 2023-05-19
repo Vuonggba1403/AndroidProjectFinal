@@ -63,6 +63,8 @@ public class DepositActivity extends AppCompatActivity {
         btnmoney = findViewById(R.id.btnadd_money);
         dispay1 = findViewById(R.id.display_money);
 
+        dispay1.setVisibility(View.INVISIBLE);
+
         imgreturn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -75,32 +77,24 @@ public class DepositActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String amount = edtmoney.getText().toString().trim();
 
-                // Check if the amount is not empty
                 if (!amount.isEmpty()) {
-                    // Call the ZaloPay SDK to create an order
                     CreateOrder orderApi = new CreateOrder();
 
                     try {
-                        // Create the order with the specified amount
                         JSONObject data = orderApi.createOrder(amount);
                         String code = data.getString("return_code");
-                        // Chuyển đổi giá trị thành số nguyên
                         int amountInCents = Integer.parseInt(amount);
 
-                        // Lấy giá trị hiện tại từ HashMap hoặc 0 nếu chưa tồn tại
                         int currentAmount = moneyMap.getOrDefault(amountInCents, 0);
 
-                        // Cộng dồn số tiền và cập nhật lại HashMap
                         currentAmount += amountInCents;
                         moneyMap.put(amountInCents, currentAmount);
 
-                        // Hiển thị kết quả lên dispay1
                         dispay1.setText(String.valueOf(currentAmount) + " VND");
 
-                        // Reset giá trị trong ô nhập liệu
                         edtmoney.setText("");
 
-                        // Lưu giá trị của dispay1 vào SharedPreferences
+
                         SharedPreferences preferences = getSharedPreferences("loginPrefs", Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = preferences.edit();
                         editor.putInt("currentAmount", currentAmount);

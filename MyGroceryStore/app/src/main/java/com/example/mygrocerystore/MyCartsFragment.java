@@ -137,18 +137,17 @@ public class MyCartsFragment extends Fragment {
         buyNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int totalAmount = calculateTotalAmount(cartModelList); // Lấy totalAmount
+                if (cartModelList.size() > 0) {
+                    int totalAmount = calculateTotalAmount(cartModelList); // Lấy totalAmount
 
-                Intent intent = new Intent(getContext(), PlacedOrderActivity.class);
-                intent.putExtra("totalAmount", totalAmount); // Truyền totalAmount qua Intent
-                intent.putExtra("itemList", (Serializable) cartModelList);
-                startActivity(intent);
+                    Intent intent = new Intent(getContext(), PlacedOrderActivity.class);
+                    intent.putExtra("totalAmount", totalAmount); // Truyền totalAmount qua Intent
+                    intent.putExtra("itemList", (Serializable) cartModelList);
+                    startActivity(intent);
+                }else {
+                    Toast.makeText(getContext(), "My Cart Is Empty !", Toast.LENGTH_SHORT).show();
 
-//                // Xoá hết sản phẩm
-//                cartModelList.clear();
-//                cartAdapter.notifyDataSetChanged();
-//                overTotalAmount.setText("Total Amount : 0 VNĐ");
-//                buyNow.setVisibility(View.GONE);
+                }
 
             }
         });
