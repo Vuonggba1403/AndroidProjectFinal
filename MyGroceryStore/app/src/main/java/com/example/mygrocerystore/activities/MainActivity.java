@@ -117,12 +117,14 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(intent);
             finish();
+
             SharedPreferences sharedPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.remove("username");
             editor.remove("password");
             editor.remove("number");
             editor.remove("address");
+            editor.remove("currentAmount");
             editor.apply();
             Toast.makeText(MainActivity.this, "Logout Successful", Toast.LENGTH_SHORT).show();
 
