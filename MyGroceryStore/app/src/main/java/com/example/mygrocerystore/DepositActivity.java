@@ -101,7 +101,7 @@ public class DepositActivity extends AppCompatActivity {
                         edtmoney.setText("");
 
                         // Lưu giá trị của dispay1 vào SharedPreferences
-                        SharedPreferences preferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+                        SharedPreferences preferences = getSharedPreferences("loginPrefs", Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = preferences.edit();
                         editor.putInt("currentAmount", currentAmount);
                         editor.apply();

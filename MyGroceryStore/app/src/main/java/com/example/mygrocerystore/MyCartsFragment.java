@@ -29,6 +29,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -57,6 +58,7 @@ public class MyCartsFragment extends Fragment {
     Button buyNow;
 
     EditText discount;
+
     ImageView clickdiscount;
 
     public MyCartsFragment() {
@@ -113,11 +115,14 @@ public class MyCartsFragment extends Fragment {
                     }
                 });
 
+
+
+
         clickdiscount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String voucher = discount.getText().toString().trim();
-                if(voucher.equalsIgnoreCase("vuongdeptrai")) {
+                if(voucher.equalsIgnoreCase("sonvuong21git")) {
                     // Nếu nhập đúng voucher thì giảm giá 5%
                     discountPercentage = 5;
                     Toast.makeText(getActivity(), "Discount code applied!", Toast.LENGTH_SHORT).show();
@@ -169,6 +174,8 @@ public class MyCartsFragment extends Fragment {
 
         return totalAmount;
     }
+
+
 
 
 }

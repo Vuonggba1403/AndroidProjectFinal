@@ -8,10 +8,17 @@ public class MyCartModel implements Serializable {
     String currentDate;
     String currentTime;
     String totalQuantity;
+
+    String img_url;
+
     int totalPrice;
     String documentId;
 
     public MyCartModel() {
+    }
+
+    public MyCartModel(String img_url) {
+        this.img_url = img_url;
     }
 
     public MyCartModel(String productName, String productPrice, String currentDate, String currentTime, String totalQuantity, int totalPrice) {
@@ -25,6 +32,14 @@ public class MyCartModel implements Serializable {
 
     public String getDocumentId() {
         return documentId;
+    }
+
+    public String getImg_url() {
+        return img_url;
+    }
+
+    public void setImg_url(String img_url) {
+        this.img_url = img_url;
     }
 
     public void setDocumentId(String documentId) {

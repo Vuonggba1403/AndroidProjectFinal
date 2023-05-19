@@ -6,6 +6,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ui.profile.ProfileFragment">
+    
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
 
     <de.hdodenhof.circleimageview.CircleImageView
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -14,22 +19,18 @@
         android:layout_height="150dp"
         android:src="@drawable/profile"
         app:civ_border_width="2dp"
-        android:layout_gravity="center"
         android:layout_marginTop="30dp"
         app:civ_border_color="#FF000000"
        />
 
-    <TextView
-        android:id="@+id/displaymoney"
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="0 VND"
-        android:layout_gravity="center"
-        android:layout_marginTop="30dp"
-        android:textSize="20dp"
-        android:textColor="@color/black"
-        android:fontFamily="@font/andika"
-        />
+        android:layout_gravity="top|end"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="140dp"
+        android:src="@drawable/cameraicon" />
+    </FrameLayout>
 
 
         <Button
@@ -83,7 +84,7 @@
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:background="@drawable/colorbutton"
-            android:fontFamily="@font/andika"
+            android:fontFamily="@font/antic"
             android:text="Update"
             android:textAllCaps="false"
             android:textColor="@color/white"
@@ -96,7 +97,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:background="@drawable/colorbutton"
-            android:fontFamily="@font/andika"
+            android:fontFamily="@font/antic"
             android:text="Delete"
             android:textAllCaps="false"
             android:textColor="@color/white"

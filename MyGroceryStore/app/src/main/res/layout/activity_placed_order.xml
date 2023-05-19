@@ -26,10 +26,40 @@
           android:textColor="@color/black"
           android:textSize="25dp"
           android:textStyle="bold"
-          android:fontFamily="@font/andika"
+          android:fontFamily="@font/alata"
           android:layout_gravity="center"
           android:layout_marginLeft="10dp"
           android:layout_height="wrap_content"/>
+   </LinearLayout>
+
+   <LinearLayout
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:orientation="horizontal"
+       android:layout_marginTop="8sp"
+       android:layout_gravity="center"
+      >
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center"
+          android:textSize="20dp"
+          android:drawableLeft="@drawable/baseline_account_balance_24"
+          android:textStyle="bold"
+          android:textColor="@color/black"
+          android:fontFamily="@font/andika"
+         android:text="Balance : "/>
+      <TextView
+          android:id="@+id/displaymoney"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="0 VND"
+          android:layout_gravity="center"
+          android:textSize="20dp"
+          android:textColor="@color/black"
+          android:fontFamily="@font/andika"
+          />
+
    </LinearLayout>
 
    <LinearLayout
@@ -91,9 +121,11 @@
    <androidx.appcompat.widget.AppCompatButton
        android:id="@+id/directpayment"
        android:layout_width="200dp"
+       android:fontFamily="@font/alata"
        android:layout_height="wrap_content"
        android:background="@drawable/colorbutton"
        android:text="Direct Payment"
+
       android:layout_marginTop="50dp"
       android:layout_gravity="center"
        android:textColor="@color/white"/>

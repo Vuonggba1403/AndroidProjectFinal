@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.mygrocerystore.R;
 import com.example.mygrocerystore.models.MyCartModel;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -22,6 +23,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+
 
 import org.w3c.dom.Text;
 
@@ -49,6 +51,8 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.ViewHolder
 
 
 
+
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -63,6 +67,12 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.ViewHolder
         holder.time.setText(cartModelList.get(position).getCurrentTime());
         holder.totalPrice.setText(String.valueOf(cartModelList.get(position).getTotalPrice()));
         holder.quantity.setText(cartModelList.get(position).getTotalQuantity());
+        Glide.with(context).load(cartModelList.get(position)).into(holder.imgProducts);
+
+
+
+
+
 
 
 
@@ -104,6 +114,7 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.ViewHolder
                 updateCartItem(cartModelList.get(position).getDocumentId(), quantity, totalPrice);
             }
         });
+
 
 
         holder.diminish.setOnClickListener(new View.OnClickListener() {
@@ -152,7 +163,7 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.ViewHolder
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView name,price,date,time,quantity, totalPrice;
-        ImageView deleteItem,increase, diminish;
+        ImageView deleteItem,increase, diminish,imgProducts;
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -167,6 +178,7 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.ViewHolder
             deleteItem = itemView.findViewById(R.id.delete);
             increase = itemView.findViewById(R.id.add_item);
             diminish = itemView.findViewById(R.id.remove_item);
+            imgProducts= itemView.findViewById(R.id.imgProduct);
 
         }
     }
