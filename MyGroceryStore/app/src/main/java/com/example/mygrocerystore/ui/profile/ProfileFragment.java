@@ -57,7 +57,6 @@ public class ProfileFragment extends Fragment {
 
     CircleImageView profileImg;
     EditText  number, address;
-    TextView displaymon;
 
     Button update,delete,btndesposit;
 
@@ -89,15 +88,9 @@ public class ProfileFragment extends Fragment {
         address = root.findViewById(R.id.profile_address);
         update = root.findViewById(R.id.update);
         delete = root.findViewById(R.id.deletein4);
-        displaymon = root.findViewById(R.id.displaymoney);
         btndesposit = root.findViewById(R.id.textView19);
 
-        // Truy xuất giá trị từ SharedPreferences
-        SharedPreferences preferences = getActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-        int currentAmount = preferences.getInt("currentAmount", 0);
 
-        // Hiển thị giá trị trong displaymon
-        displaymon.setText(String.valueOf(currentAmount) + " VND");
 
 
 

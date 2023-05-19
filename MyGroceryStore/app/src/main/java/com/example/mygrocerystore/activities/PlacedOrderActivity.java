@@ -46,7 +46,7 @@ public class PlacedOrderActivity extends AppCompatActivity
     FirebaseAuth auth;
     FirebaseFirestore firestore;
 
-    TextView overTotalAmount;
+    TextView overTotalAmount,displaymon;
     Button paymentonline,zalopay;
     EditText phonenumber,gmail,delivery;
 
@@ -76,9 +76,11 @@ public class PlacedOrderActivity extends AppCompatActivity
         gmail = findViewById(R.id.gmail);
         delivery = findViewById(R.id.delivery);
         zalopay = findViewById(R.id.btnzalopay);
+        displaymon = findViewById(R.id.displaymoney);
 
 
         gmail.setText(auth.getCurrentUser().getEmail());
+
 
         // Nhận giá trị totalAmount từ Intent
         int totalAmount = getIntent().getIntExtra("totalAmount", 0);
@@ -157,26 +159,24 @@ public class PlacedOrderActivity extends AppCompatActivity
                     }
 
                 }
-                }
+            }
 
         });
 
-
-
-
-        // Retrieve the stored address from SharedPreferences
-        SharedPreferences preferences = getSharedPreferences("loginPrefs", Context.MODE_PRIVATE);
+         SharedPreferences preferences = getSharedPreferences("loginPrefs", Context.MODE_PRIVATE);
         String storedAddress = preferences.getString("address", "");
         String storeNumber = preferences.getString("number", "");
+
+        int currentAmount = preferences.getInt("currentAmount", 0);
+
+        displaymon.setText(String.valueOf(currentAmount) + " VND");
         if (!storedAddress.isEmpty()) {
             delivery.setText(storedAddress);
             phonenumber.setText(storeNumber);
         }
 
 
-
         overTotalAmount.setText(totalAmount + " VNĐ");
-
 
 
         paymentonline.setOnClickListener(new View.OnClickListener() {
@@ -187,54 +187,55 @@ public class PlacedOrderActivity extends AppCompatActivity
                 String deli = delivery.getText().toString().trim();
 
                 if (!Pattern.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$", gm)) {
-                    // Nếu chuỗi không đúng định dạng email, hiển thị thông báo lỗi
                     Toast.makeText(PlacedOrderActivity.this, "Invalid email address", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (!Pattern.matches("^\\d{10}$", phone)) {
-                    // Nếu chuỗi không đúng định dạng số điện thoại, hiển thị thông báo lỗi
                     Toast.makeText(PlacedOrderActivity.this, "Invalid phone number", Toast.LENGTH_SHORT).show();
                 }
 
+                int displaymoney1 = Integer.parseInt(displaymon.getText().toString().split(" ")[0]);
+                int totalAmount1 = Integer.parseInt(String.valueOf(totalAmount));
 
-                //kiểm tra nhập tt đầy đủ mới cho click
                 if (phone.isEmpty() || gm.isEmpty() || deli.isEmpty()) {
                     Toast.makeText(PlacedOrderActivity.this, "Please Enter Information !", Toast.LENGTH_SHORT).show();
                     return;
                 } else {
+                    if (displaymoney1 < totalAmount1) {
+                        Toast.makeText(PlacedOrderActivity.this, "Please Desposit More Money !", Toast.LENGTH_SHORT).show();
+                    } else {
+                        displaymoney1 -= totalAmount;
+                        // Cập nhật giá trị currentAmount
+                        displaymon.setText(String.valueOf(displaymoney1) + " VND");
 
-
-
-                }
-
-                firestore.collection("AddToCart")
-                        .document(auth.getCurrentUser().getUid())
-                        .collection("CurrentUser")
-                        .get()
-                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                Context context;
-                                if (task.isSuccessful()) {
-                                    for (QueryDocumentSnapshot document : task.getResult()) {
-                                        document.getReference().delete();
+                        firestore.collection("AddToCart")
+                                .document(auth.getCurrentUser().getUid())
+                                .collection("CurrentUser")
+                                .get()
+                                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                        Context context;
+                                        if (task.isSuccessful()) {
+                                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                                document.getReference().delete();
+                                            }
+                                        } else {
+                                        }
                                     }
-                                    Toast.makeText(PlacedOrderActivity.this, "Back To Home", Toast.LENGTH_SHORT).show();
-                                } else {
-                                    Toast.makeText(PlacedOrderActivity.this, "Error deleting items: " + task.getException(), Toast.LENGTH_SHORT).show();
-                                }
+                                });
+
+
+                        Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                Intent intent = new Intent(PlacedOrderActivity.this, MainActivity.class);
+                                startActivity(intent);
                             }
-                        });
-
-
-                Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        Intent intent = new Intent(PlacedOrderActivity.this, MainActivity.class);
-                        startActivity(intent);
+                        }, 3000);
                     }
-                }, 3000);
+                }
             }
         });
 

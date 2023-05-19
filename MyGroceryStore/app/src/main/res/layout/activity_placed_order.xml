@@ -35,6 +35,36 @@
    <LinearLayout
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
+       android:orientation="horizontal"
+       android:layout_marginTop="8sp"
+       android:layout_gravity="center"
+      >
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center"
+          android:textSize="20dp"
+          android:drawableLeft="@drawable/baseline_account_balance_24"
+          android:textStyle="bold"
+          android:textColor="@color/black"
+          android:fontFamily="@font/andika"
+         android:text="Balance : "/>
+      <TextView
+          android:id="@+id/displaymoney"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="0 VND"
+          android:layout_gravity="center"
+          android:textSize="20dp"
+          android:textColor="@color/black"
+          android:fontFamily="@font/andika"
+          />
+
+   </LinearLayout>
+
+   <LinearLayout
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
        android:layout_gravity="center"
        android:layout_marginTop="50dp"
        android:orientation="horizontal">
@@ -46,7 +76,6 @@
       <EditText
           android:id="@+id/phonenumber"
           android:layout_width="300dp"
-          android:backgroundTint="@color/white"
           android:hint="Enter Phone Number"
           android:layout_marginLeft="10dp"
           android:layout_height="match_parent"/>
@@ -66,7 +95,6 @@
           android:id="@+id/gmail"
           android:layout_width="300dp"
           android:hint="Enter Gmail"
-          android:backgroundTint="@color/white"
           android:layout_marginLeft="10dp"
           android:layout_height="match_parent"/>
    </LinearLayout>
@@ -85,7 +113,6 @@
       <EditText
           android:layout_width="300dp"
           android:id="@+id/delivery"
-          android:backgroundTint="@color/white"
           android:layout_marginLeft="10dp"
           android:hint="Delivery Address"
           android:layout_height="match_parent"/>

@@ -32,18 +32,6 @@
         android:src="@drawable/cameraicon" />
     </FrameLayout>
 
-    <TextView
-        android:id="@+id/displaymoney"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="0 VND"
-        android:layout_gravity="center"
-        android:layout_marginTop="30dp"
-        android:textSize="20dp"
-        android:textColor="@color/black"
-        android:fontFamily="@font/andika"
-        />
-
 
         <Button
             android:id="@id/textView19"
